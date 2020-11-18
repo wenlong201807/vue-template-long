@@ -27,7 +27,7 @@ router.beforeEach(async (to, _, next) => {
   }
   // 要校验一下，当前用户有没有登录
   let flag = await store.dispatch('validateAction')
-  console.log('flag:', flag)
+  // console.log('flag:', flag)
   if (flag) {
     if (to.name === 'login') {
       next('/')
@@ -40,11 +40,15 @@ router.beforeEach(async (to, _, next) => {
     // 需要特别考虑
     const flags = to.matched.some(item => item.meta.needLogin)
     if (flags) {
-      next('/login')
+      next() // 暂时不用这个功能***开发使用
+      // next('/login') // 正常使用的
     } else {
       next()
     }
   }
+
+  // 暂时不用这个功能
+  next()
 })
 
 

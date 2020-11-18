@@ -5,6 +5,7 @@
       <router-link class="kk" to="/Login">登录</router-link>
       <router-link class="kk" to="/Profile">个人中心</router-link>
 
+      <router-link class="kk" to="/ParentCascader">ParentCascader</router-link>
       <router-link class="kk" to="/parentlist">parentlist</router-link>
       <router-link class="kk" to="/ParentIview">ParentIview</router-link>
       <router-link class="kk" to="/JWT">JWT</router-link>

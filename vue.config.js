@@ -32,5 +32,13 @@ module.exports = {
     }
     // 下边这个， 如果你是本地自己mock 的话用after这个属性，线上环境一定要干掉
     // after: require("./mock/mock-server.js")
-  }
+  },
+  // 参考资料 https://blog.csdn.net/qq_36407748/article/details/90679991
+  // css: { 
+  //   loaderOptions: {
+  //     sass: {
+  //       prependData: `@import "@/assets/scss/style.scss";`
+  //     }
+  //   }
+  // }
 };

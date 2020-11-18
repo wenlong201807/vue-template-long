@@ -48,6 +48,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "Profile" */ '../views/Profile.vue'),
     meta:{needLogin:true,limit:'superAdmin'} // 自己增加的备注，额外一些数据
   },
+  {
+    path: '/ParentCascader',
+    name: 'ParentCascader',
+    component: () => import(/* webpackChunkName: "ParentCascader" */ '../views/ParentCascader.vue'),
+    meta:{needLogin:true,limit:'superAdmin'} // 自己增加的备注，额外一些数据
+  },
 ]
 
 // 2.创建实例

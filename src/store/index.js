@@ -21,7 +21,7 @@ const store = new Vuex.Store({
   actions: {
     async validateAction ({commit}) {
       const r = await validate()
-      console.log('校验是否登录的：', r)
+      // console.log('校验是否登录的：', r)
       if (r.code === 1) {
         return false
       }
@@ -32,7 +32,7 @@ const store = new Vuex.Store({
     },
     async loginAction ({commit},username) {
       let r = await login(username)
-      console.log(r, commit)
+      // console.log(r, commit)
       if (r.code === 1) {
         return Promise.reject(r)
       }
