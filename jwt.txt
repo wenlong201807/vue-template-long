@@ -1,0 +1,5 @@
+// home 显示首页
+// login 登录页面
+// profile 个人中心页
+
+// 文档  vuePress

@@ -1,24 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="nav">
+      <router-link class="kk" to="/">首页</router-link>
+      <router-link class="kk" to="/Login">登录</router-link>
+      <router-link class="kk" to="/Profile">个人中心</router-link>
+
+      <router-link class="kk" to="/parentlist">parentlist</router-link>
+      <router-link class="kk" to="/ParentIview">ParentIview</router-link>
+      <router-link class="kk" to="/JWT">JWT</router-link>
+      <router-link class="kk" to="/about">About</router-link>
+      <router-link class="kk" to="/about">About</router-link>
+
+    </div>
+
+    <!-- 路由出口 -->
+    <router-view />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+// import {getTest} from './api/index'
+// export default {
+//   mounted(){
+//     getTest().then(res => {
+//       console.log('跟组件：',res)
+//     })
+//   }
+// }
 </script>
 
+
 <style>
+.kk{
+  margin: 20px;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

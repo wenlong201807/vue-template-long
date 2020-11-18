@@ -1,24 +1,7 @@
-# vue-router-long2
+# vue-template-long
 
-## Project setup
-```
-npm install
-```
+## 客户端
+- 启动  npm run serve
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 服务器端
+- 启动  nodemon server.js
