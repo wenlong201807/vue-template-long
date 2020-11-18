@@ -8,9 +8,9 @@
 
 export default {
   clickOutside: {
-    inserted(el, bindings, vnode) {
+    inserted(el, bindings) {
       // el 真实的dom节点
-      console.log(el, bindings, vnode);
+      // console.log(el, bindings, vnode);
       document.addEventListener('click', (e) => {
         if (e.target === el || el.contains(e.target)) {
           return;

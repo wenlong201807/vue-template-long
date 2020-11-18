@@ -2,7 +2,7 @@
   <div class="content">
     <!-- 先显示第一层 -->
     <div class="content-left">
-      {{ level }}
+      <!-- {{ level }} -->
       <div v-for="(item, index) in options" :key="index">
         <div class="label" @click="select(item)">{{ item.label }}</div>
       </div>
@@ -74,7 +74,9 @@ export default {
   .content-left {
     border:1px solid #ccc;
     min-height: 150px;
-    background: pink;
+    max-height: 200px;
+    overflow-y: scroll;
+    // background: pink;
   }
   .label{
     width: 80px;

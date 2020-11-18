@@ -2,33 +2,55 @@
   <div class="about">
     <!-- {{value}} -->
     <!-- 获取用户选中的数据 -->
-    <MyCascader :options="options"  v-model="value"></MyCascader>
+    <MyCascader :options="options" v-model="value" @input="input"></MyCascader>
     <h1>级联组件</h1>
     <el-cascader
       v-model="value1"
       :options="options"
       @change="handleChange"
     ></el-cascader>
-
- 
   </div>
 </template>
 
 <script>
-import MyCascader from '../components/CascaderComp/Cascader.vue'
+import MyCascader from '../components/CascaderComp/Cascader.vue';
+import cityList from '../../data.json';
+// console.log(cityList) // 可以获取到数据
+// 模拟异步获取数据
+
+const fetchData = (pid) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(cityList.filter((item) => item.pid == pid));
+    }, 1000);
+  });
+};
+
+// fetchData(0).then(data => {
+//   console.log('异步获取城市列表数据：',data)
+// })
 export default {
-  
-  components:{
-    MyCascader
+  components: {
+    MyCascader,
+  },
+  async created() {
+    this.options = await fetchData(0);
   },
   methods: {
+    async input(value) { // 这个处理过于复杂，用户体验不好，需要内部封装
+      // [{},{},{ }]
+      let currentItem = value[value.length - 1];
+      let children = await fetchData(currentItem.id);
+      console.log(children)
+      this.$set(currentItem, 'children', children);
+    },
     handleChange(value) {
       console.log(value);
     },
   },
   data() {
     return {
-      myvalue:[],
+      myvalue: [],
       value: [],
       value1: [],
       options: [
