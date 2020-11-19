@@ -78,7 +78,7 @@ app.get('/roleAuth', (req, res) => {
         id: 4,
         auth: 'cart-list',
       },
-      {
+      { 
         pid: 4,
         name: '彩票',
         id: 5,

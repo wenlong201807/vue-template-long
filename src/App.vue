@@ -12,7 +12,11 @@
       <router-link class="kk" to="/JWT">测试中心</router-link>
       <router-link class="kk" to="/about">About</router-link>
 
-
+      <div>
+        <h2>按钮级别权限设置</h2>
+        <el-button v-has="'edit'">编辑</el-button>
+        <el-button v-has="'add'">添加</el-button>
+      </div>
     </div>
 
     <!-- 路由出口 -->
@@ -23,21 +27,31 @@
 <script>
 // import {getTest} from './api/index'
 export default {
-  mounted(){
+  directives: {
+    has: {
+      inserted(el, bindings, vnode) {
+        let flag = vnode.context.$store.state.btnPermission[bindings['value']];
+          !flag && el.parentNode && el.parentNode.removeChild(el);
+        // if (el) {
+        //   !flag && el.parentNode && el.parentNode.removeChild(el);
+        // }
+      },
+    },
+  },
+  mounted() {
     // getTest().then(res => {
     //   console.log('跟组件：',res)
     // })
-  }
-}
+  },
+};
 </script>
 
-
 <style>
-.kk{
+.kk {
   margin: 20px;
 }
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
