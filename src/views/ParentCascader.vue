@@ -1,12 +1,17 @@
 <template>
   <div class="about">
     <!-- {{value}} -->
-    <!-- 获取用户选中的数据 -->
-    <MyCascader :options="options" v-model="value" @input="input"></MyCascader>
+    <!-- 获取用户选中的数据  options.sync 支持异步获取数据 -->
+    <MyCascader
+      :options.sync="options"
+      v-model="value"
+      :lazyload="lazyload"
+    ></MyCascader>
+    <!-- <MyCascader :options="options" v-model="value" @input="input"></MyCascader> -->
     <h1>级联组件</h1>
     <el-cascader
       v-model="value1"
-      :options="options"
+      :options="options1"
       @change="handleChange"
     ></el-cascader>
   </div>
@@ -37,12 +42,18 @@ export default {
     this.options = await fetchData(0);
   },
   methods: {
-    async input(value) { // 这个处理过于复杂，用户体验不好，需要内部封装
+    async input(value) {
+      // 这个处理过于复杂，用户体验不好，需要内部封装
       // [{},{},{ }]
       let currentItem = value[value.length - 1];
       let children = await fetchData(currentItem.id);
-      console.log(children)
+      console.log(children);
       this.$set(currentItem, 'children', children);
+    },
+    async lazyload(id, callback) {
+      // 你需要传入一个方法，这个方法第一个参数使选中的id
+      let children = await fetchData(id);
+      callback(children);
     },
     handleChange(value) {
       console.log(value);
@@ -53,7 +64,8 @@ export default {
       myvalue: [],
       value: [],
       value1: [],
-      options: [
+      options: [],
+      options1: [
         {
           value: 'zhinan',
           label: '指南',

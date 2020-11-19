@@ -40,7 +40,18 @@ export default {
   },
   computed: { // 有缓存， computed = watch + 缓存 
     lists() { 
-      return this.value[this.level] && this.value[this.level].children
+
+      // 使用异步的方式之后，Cascader.vue  中修改的是options，而没有修改this.value 此处有缓存，无法跟新视图
+      // 因此，这里需要自己去查找哪一层，查询其对应的儿子  children属性（为了下一级列表显示）
+      if(this.value[this.level] && this.value[this.level].id){
+        let o = this.options.find(item => item.id == this.value[this.level].id)
+        return o.children
+      }else{
+        return []
+      }
+
+      // 总共的数据变化了，不会触发视图更新
+      // return this.value[this.level] && this.value[this.level].children
       // 被缓存了，无法更新
       // return this.currentSelected && this.currentSelected.children;
     },
