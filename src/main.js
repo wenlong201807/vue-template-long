@@ -13,42 +13,22 @@ Vue.use(ViewUI);
 
 Vue.use(ElementUI);
 
-// 不需要校验路由的白名单
-const whiteList = ['/']
-
 
 // 路由的渲染流程，钩子的执行顺序
 router.beforeEach(async (to, _, next) => {
-  // console.log('路由钩子中的第一个：跳转路由前执行的：',to, from, next)
-  // debugger
-  // 判断当前路由是否需要校验的
-  if (whiteList.includes(to.path)) {
-    return next()
-  }
-  // 要校验一下，当前用户有没有登录
-  let flag = await store.dispatch('validateAction')
-  // console.log('flag:', flag)
-  if (flag) {
-    if (to.name === 'login') {
-      next('/')
-    } else {
-      next() // 登陆过，而且不是login 页面，那就 正常跳转就可以
-    }
+  console.log(to)
+
+  if (!store.state.hasPermission) { // 如果没有权限，需要获取权限
+    // 获取需要添加的路由
+    let newRoutes = await store.dispatch('getNewRoute')
+    console.log('路由狗子：',newRoutes)
+    // 动态添加路由
+    // router.addRoutes()
+    next()
   } else {
-    // 没有登陆过，如果这条路由，还需要登录，那么就跳转到登录页面
-    // /product/get   /product/add  /product/delete  这个页面，可以会模糊匹配
-    // 需要特别考虑
-    const flags = to.matched.some(item => item.meta.needLogin)
-    if (flags) {
-      next() // 暂时不用这个功能***开发使用
-      // next('/login') // 正常使用的
-    } else {
-      next()
-    }
+    next()
   }
 
-  // 暂时不用这个功能
-  next()
 })
 
 

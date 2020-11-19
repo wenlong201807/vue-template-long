@@ -1,46 +1,22 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import {login, validate} from '../api/index'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import {roleAuth} from '../api/index'
 
-
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    count: 0,
-    username:''
+    hasPermission: false,
   },
-  mutations: {
-    increment (state) {
-      state.count++
-    },
-    setUsername (state, username) {
-      state.username = username
-    }
-  },
+  mutations: {},
   actions: {
-    async validateAction ({commit}) {
-      const r = await validate()
-      // console.log('校验是否登录的：', r)
-      if (r.code === 1) {
-        return false
-      }
-
-      commit('setUsername', r.username)
-      localStorage.setItem('token', r.token)
-      return true
-    },
-    async loginAction ({commit},username) {
-      let r = await login(username)
-      // console.log(r, commit)
-      if (r.code === 1) {
-        return Promise.reject(r)
-      }
-      localStorage.setItem('token', r.token)
-      commit('setUsername', r.username)
-      
+    async getNewRoute () { // 发起请求，，请求后端数据
+      // 需要 把刚才的数据扁平化
+      // 获取权限列表 
+      const r = await roleAuth()
+      console.log('后端权限接口：',r)
     }
-  }
-})
- 
-export default store
+  },
+});
+
+export default store;

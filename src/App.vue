@@ -2,15 +2,16 @@
   <div id="app">
     <div id="nav">
       <router-link class="kk" to="/">首页</router-link>
-      <router-link class="kk" to="/Login">登录</router-link>
-      <router-link class="kk" to="/Profile">个人中心</router-link>
+      <router-link class="kk" to="/Login">登录(登录权限)</router-link>
+      <router-link class="kk" to="/Profile">个人中心(登录权限)</router-link>
 
-      <router-link class="kk" to="/ParentCascader">ParentCascader</router-link>
-      <router-link class="kk" to="/parentlist">parentlist</router-link>
-      <router-link class="kk" to="/ParentIview">ParentIview</router-link>
-      <router-link class="kk" to="/JWT">JWT</router-link>
+      <router-link class="kk" to="/cart">购物车</router-link>
+      <router-link class="kk" to="/ParentCascader">下拉级联组件</router-link>
+      <router-link class="kk" to="/parentlist">函数组件/插槽</router-link>
+      <router-link class="kk" to="/ParentIview">自定义可编辑table</router-link>
+      <router-link class="kk" to="/JWT">测试中心</router-link>
       <router-link class="kk" to="/about">About</router-link>
-      <router-link class="kk" to="/about">About</router-link>
+
 
     </div>
 
@@ -21,13 +22,13 @@
 
 <script>
 // import {getTest} from './api/index'
-// export default {
-//   mounted(){
-//     getTest().then(res => {
-//       console.log('跟组件：',res)
-//     })
-//   }
-// }
+export default {
+  mounted(){
+    // getTest().then(res => {
+    //   console.log('跟组件：',res)
+    // })
+  }
+}
 </script>
 
 
