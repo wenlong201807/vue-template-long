@@ -1,0 +1,57 @@
+
+
+一、入口文件
+vue.prototype.$mount  函数劫持
+vue.prototype.patch   对比dom
+vue.prototype.$mount  真实的$mount 
+
+二、 core/index  vue核心
+initGlobal API初始化全局api
+vue.util
+defineReactive
+set
+delete
+nextick
+initUse
+extend
+initMixin
+
+三、instance/index
+
+进入 vue 就会调用 _init方法
+
+// 核心目的： 给当前实例添加 属性 和  方法
+1.initMixin(vue) // 初始化mixin
+  1.1 initLifecycle(vm) // 初始化父子关系
+  1.2 initEvents(vm) // 初始化events 属性 {}
+  1.3 initRender(vm) // vm.$createElement
+  1.4 callHook(vm,'beforeCreate') // 调用beforeCreate
+  1.5 initInjections(vm) // 初始化注入数据
+  1.6 initState(vm) // 响应式原理 MVVM
+  1.7 initProvide(vm) // vm._provided
+  1.8 callHook(vm,'created') // 调用了 created
+2.stateMixin(vue) // $.set  $.delete  $.watch
+3.eventsMixin(vue) // 实现vue的发布订阅模式  $.on $.off $.once $.emit
+4.lifecycleMixin(vue)
+    4.1 vue.prototype._update  // 第一次  initial render  // 非第一次 updates
+    4.2 vue.prototype.$forceUpdate  // 强制性的重新更新 vm._watcher.update()
+    4.3 vue.prototype.$destory  // 组件销毁  
+        调用 callHook(vm,'beforeDestory') // 把自己从父节点移除
+        移除所有的监听 vm._watcher[i].teardown()
+        清除所有的指令 vm._patch_(vm._vnode,null)
+        callHook(vm,'destoryed')
+        vm.$off 
+        // 这一步只是把所有数据断开链接，但是视图还存在
+
+5.renderMixin(vue)
+    vue.prototype.$nextick
+    vue.prototype._render
+
+
+挂载组件  mountComponent
+1.callHook(vm,'beforeMount') // 开始挂载
+2.updateComponent // 组件级别更新  将组件模板重新渲染到页面上
+
+// 错误捕获
+globalHandleError(e,cur,'errorCaptured hook')
+  

@@ -1,7 +1,8 @@
 import Vue from 'vue';
+// import VueRouter from './vue-router';
 import VueRouter from 'vue-router';
 
-// 1.应用插件
+// 1.应用插件 // use 方法会调用install方法
 Vue.use(VueRouter);
 
 const routes = [
